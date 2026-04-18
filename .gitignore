@@ -1,5 +1,52 @@
+# ---- R / RStudio ----
+*.Rproj
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 *.Rproj
+*.Rcheck/
+*.Rapp.history
+*.tar.gz
+*-Ex.R
+vignettes/*.html
+vignettes/*.pdf
+.httr-oauth
+
+# ---- renv ----
+# renv manages its own .gitignore inside renv/; these are belt-and-braces
+renv/cellar/
+renv/local/
+renv/staging/
+renv/sandbox/
+renv/python/
+
+# ---- Secrets / env ----
+.Renviron
+.env
+.env.*
+!.env.example
+
+# ---- Logs / build artefacts ----
+logs/
+*.log
+_cache/
+cache/
+
+# ---- Temp scratch scripts ----
+_*.R
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ---- IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- Claude Code worktrees / local scratch ----
+.claude/
