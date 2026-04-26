@@ -1,0 +1,3 @@
+# Ignorar el archivo de la versión previa: contiene scripts con deps
+# ya no usadas por la app (d3heatmap, ggthemes, hydroGOF).
+dev/

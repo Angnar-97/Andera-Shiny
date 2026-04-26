@@ -1,54 +1,52 @@
-# ----- Project Description ----
+# ----- Andera-Shiny ----
 #
-# Shiny application for the study of microbiomes
-# Date: 18/04/2026
-# Author: Alejandro Navas González
-# 
+# Shiny dashboard para el análisis exploratorio de microbiomas.
+# Los módulos Shiny viven en R/ y son autocargados por Shiny.
 
-# ----- General Zone ----
-
-# Loading of the packages for shiny development
+# ----- Shiny + Bootstrap 5 (bslib) -----
 library(shiny)
+library(bslib)
+library(bsicons)
 library(shinycssloaders)
-library(shinydashboard)
 library(shinyalert)
 library(shinyWidgets)
 library(shinymeta)
 library(htmlwidgets)
 
-# Loading of the package used to edit the interface theme
-library(fresh)
-
-# Load the packages to be used for the tables in the application. 
+# ----- Tablas y manipulación de datos -----
 library(tidyverse)
 library(data.table)
 library(DT)
 
-# Loading of the packages for the statistical study
+# ----- Estadística -----
 library(skimr)
 library(ggcorrplot)
 library(ggstatsplot)
 library(PMCMRplus)
 library(psych)
 
-# Loading of bioconductor packages
+# ----- Bioconductor -----
 library(phyloseq)
 library(vegan)
 library(microbiome)
 library(ComplexHeatmap)
-# library(microViz)
+library(microViz)
 
-# Loading of packages to edit the graphics palettes
+# ----- Paletas -----
 library(palettetown)
 library(ggsci)
 library(viridis)
 library(RColorBrewer)
 
-
-# Establish a common theme for the graphics.
+# ----- Tema ggplot común -----
 theme_set(
-  theme_light() + 
+  theme_minimal(base_size = 14, base_family = "serif") +
     theme(
-      text = element_text(size = 16, family = "serif")
-      )
-  )
+      plot.background  = element_rect(fill = "#FAF7F0", color = NA),
+      panel.background = element_rect(fill = "#FAF7F0", color = NA),
+      panel.grid.minor = element_blank(),
+      panel.grid.major = element_line(color = "#E5DDC9", linewidth = 0.25),
+      strip.background = element_rect(fill = "#E5DDC9", color = NA),
+      strip.text       = element_text(color = "#1F2E28", face = "bold")
+    )
+)

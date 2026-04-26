@@ -1,0 +1,947 @@
+/* ================================================================
+   Andera — editorial design system
+   Paleta medioambiental inspirada en el árbol celta:
+     canvas hueso/crema, verde sage como tinta, terracota como accent
+     editorial y un toque dorado para eyebrows y highlights sutiles.
+     Hoja sage para éxito, ámbar para avisos, azul-agua para info.
+   Tipografía: Crimson Pro (display), Inter (body), JetBrains Mono (code).
+   Ritmo vertical sobre un 8-pt grid.
+   ================================================================ */
+
+:root {
+  /* --- Surface --- */
+  --an-bg:          #FAF7F0;   /* crema / hueso */
+  --an-surface:     #FFFFFF;
+  --an-surface-alt: #F1ECDF;
+
+  /* --- Ink / brand (tono sage) --- */
+  --an-ink:         #2A3D32;   /* verde bosque oscuro — navbar, headings */
+  --an-ink-soft:    #4A6D5E;   /* sage profundo — primary */
+  --an-ink-lighter: #6D8A7A;   /* sage medio — hovers / highlights */
+
+  /* --- Accents --- */
+  --an-terracotta:      #B87355;   /* secondary / accent editorial dominante */
+  --an-terracotta-soft: #EAD5C6;
+  --an-gold:            #C4A962;   /* accent editorial — eyebrows, selección */
+  --an-gold-soft:       #E5D5A8;
+  --an-leaf:            #8FA872;   /* success / sage leaf */
+  --an-water:           #5B7D8C;   /* info */
+  --an-amber:           #D4A437;   /* warning */
+  --an-oxblood:         #8C3B3B;   /* danger */
+
+  /* --- Text --- */
+  --an-text:        #1A2520;
+  --an-text-soft:   #4E5A52;
+  --an-muted:       #7E897F;
+
+  /* --- Structure --- */
+  --an-hairline:        #E5DDC9;
+  --an-hairline-strong: #D4CAB2;
+  --an-shadow-xs:  0 1px 2px rgba(42, 61, 50, 0.04);
+  --an-shadow-sm:  0 2px 6px rgba(42, 61, 50, 0.06);
+  --an-shadow-md:  0 6px 20px rgba(42, 61, 50, 0.08);
+
+  /* --- Type scale --- */
+  --an-font-serif: "Crimson Pro", "Source Serif Pro", Georgia, serif;
+  --an-font-sans:  "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --an-font-mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ----------------------------------------------------------------
+   Base
+   ---------------------------------------------------------------- */
+
+html, body {
+  background: var(--an-bg);
+  color: var(--an-text);
+  font-family: var(--an-font-sans);
+  font-feature-settings: "cv11", "ss01", "kern";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .andera-serif {
+  font-family: var(--an-font-serif);
+  color: var(--an-ink);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+code, pre, kbd, .andera-mono {
+  font-family: var(--an-font-mono);
+  font-size: 0.88em;
+}
+
+a {
+  color: var(--an-ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(74, 109, 94, 0.22);
+  transition: color 0.15s, border-color 0.15s;
+}
+a:hover {
+  color: var(--an-terracotta);
+  border-bottom-color: var(--an-terracotta);
+}
+a.btn, .navbar a, .card-header a,
+.andera-secondary-link, .andera-footer a {
+  border-bottom: none;
+}
+
+/* ----------------------------------------------------------------
+   Navbar
+   ---------------------------------------------------------------- */
+
+.navbar.navbar-fixed-top,
+.navbar-default,
+nav.navbar {
+  background-color: var(--an-ink) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.45rem 1.2rem;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.andera-brand {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  color: #FFFFFF !important;
+  padding: 0.2rem 0;
+}
+
+.andera-logo {
+  height: 32px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.94;
+}
+
+.andera-brand-text {
+  font-family: var(--an-font-serif);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 0.55rem 0.85rem !important;
+  position: relative;
+  transition: color 0.12s;
+}
+.navbar .nav-link:hover {
+  color: #FFFFFF !important;
+  background: transparent;
+}
+.navbar .nav-link.active,
+.navbar .nav-item.show > .nav-link {
+  color: #FFFFFF !important;
+  background: transparent;
+}
+.navbar .nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.1rem;
+  height: 2px;
+  background: var(--an-terracotta);
+  border-radius: 2px;
+}
+
+.navbar .dropdown-menu {
+  background: var(--an-surface);
+  border: 1px solid var(--an-hairline);
+  border-radius: 0.4rem;
+  padding: 0.35rem 0;
+  box-shadow: var(--an-shadow-md);
+  margin-top: 0.3rem;
+}
+.navbar .dropdown-item {
+  font-size: 0.92rem;
+  padding: 0.5rem 1.1rem;
+  color: var(--an-text);
+  border-bottom: none;
+}
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+  background: var(--an-surface-alt);
+  color: var(--an-ink);
+}
+.navbar .dropdown-item.active,
+.navbar .dropdown-item:active {
+  background: var(--an-surface-alt);
+  color: var(--an-ink);
+  font-weight: 600;
+}
+
+.andera-navbar-spacer { height: 8px; }
+
+/* ----------------------------------------------------------------
+   Eyebrow labels (small-caps tracked)
+   ---------------------------------------------------------------- */
+
+.andera-eyebrow {
+  display: inline-block;
+  font-family: var(--an-font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--an-gold);
+  margin-bottom: 10px;
+}
+
+/* ----------------------------------------------------------------
+   Banner
+   ---------------------------------------------------------------- */
+
+.andera-banner {
+  padding: 14px 24px 0 24px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.andera-banner-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  border-radius: 6px;
+  border-left: 3px solid;
+  background: var(--an-surface);
+}
+.andera-banner-ok {
+  border-left-color: var(--an-leaf);
+  color: var(--an-text);
+}
+.andera-banner-ok strong { color: var(--an-ink-soft); }
+
+.andera-banner-empty {
+  border-left-color: var(--an-terracotta);
+  background: #FDF5ED;
+  color: var(--an-text);
+}
+.andera-banner-empty strong { color: var(--an-terracotta); }
+
+.andera-banner-chip {
+  margin-left: 16px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.andera-banner-chip-filtered {
+  background: rgba(143, 168, 114, 0.14);
+  color: var(--an-leaf);
+  font-weight: 500;
+}
+.andera-banner-chip-muted {
+  background: rgba(109, 138, 122, 0.10);
+  color: var(--an-muted);
+}
+
+/* ----------------------------------------------------------------
+   Page wrapper
+   ---------------------------------------------------------------- */
+
+.andera-page {
+  padding: 24px 24px 56px 24px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.andera-page-title {
+  font-family: var(--an-font-serif);
+  color: var(--an-ink);
+  font-weight: 600;
+  font-size: 1.9rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px 0;
+}
+
+.andera-page-lead {
+  color: var(--an-text-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 28px 0;
+  max-width: 760px;
+}
+
+.andera-card-help {
+  font-size: 0.95rem;
+  color: var(--an-text-soft);
+  margin: 0 0 12px 0;
+}
+
+.andera-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+/* ----------------------------------------------------------------
+   Hero (home)
+   ---------------------------------------------------------------- */
+
+.andera-hero {
+  background:
+    radial-gradient(ellipse at 80% 10%, rgba(184, 115, 85, 0.07) 0%, transparent 48%),
+    radial-gradient(ellipse at 50% 5%,  rgba(196, 169, 98, 0.08) 0%, transparent 42%),
+    radial-gradient(ellipse at 10% 90%, rgba(74, 109, 94, 0.10) 0%, transparent 52%),
+    var(--an-bg);
+  border-bottom: 1px solid var(--an-hairline);
+  padding: 64px 24px 72px 24px;
+}
+
+.andera-hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.andera-hero-art {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.andera-hero-logo {
+  width: 220px;
+  height: auto;
+  opacity: 0.78;
+  filter: drop-shadow(0 4px 14px rgba(42, 61, 50, 0.10));
+  transition: opacity 0.2s, transform 0.3s ease, filter 0.3s ease;
+}
+.andera-hero-logo:hover {
+  opacity: 0.92;
+  transform: rotate(2deg);
+  filter: drop-shadow(0 6px 20px rgba(196, 169, 98, 0.35));
+}
+
+.andera-hero-content {
+  max-width: 620px;
+}
+
+.andera-hero-title {
+  font-family: var(--an-font-serif);
+  font-weight: 600;
+  font-size: clamp(2.8rem, 6vw, 4.4rem);
+  color: var(--an-ink);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  margin: 4px 0 10px 0;
+}
+
+.andera-hero-tagline {
+  font-family: var(--an-font-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--an-ink-soft);
+  margin: 0 0 20px 0;
+  letter-spacing: -0.01em;
+}
+
+.andera-hero-sub {
+  color: var(--an-text-soft);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  margin: 0 0 28px 0;
+  max-width: 580px;
+}
+
+.andera-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.andera-cta {
+  background: var(--an-ink) !important;
+  border-color: var(--an-ink) !important;
+  color: #FFFFFF !important;
+  padding: 12px 26px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em;
+  border-radius: 3px !important;
+  border-bottom: none !important;
+  transition: background 0.15s, transform 0.15s;
+}
+.andera-cta:hover {
+  background: var(--an-ink-soft) !important;
+  border-color: var(--an-ink-soft) !important;
+  transform: translateY(-1px);
+}
+.andera-cta .fa, .andera-cta .fas {
+  margin-left: 8px;
+}
+
+.andera-secondary-link {
+  color: var(--an-ink-soft) !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(74, 109, 94, 0.25) !important;
+  padding-bottom: 2px;
+}
+.andera-secondary-link:hover {
+  color: var(--an-terracotta) !important;
+  border-bottom-color: var(--an-terracotta) !important;
+}
+
+@media (max-width: 860px) {
+  .andera-hero { padding: 40px 20px 48px 20px; }
+  .andera-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+  .andera-hero-content   { max-width: 100%; }
+  .andera-hero-actions   { justify-content: center; }
+  .andera-hero-logo      { width: 160px; }
+}
+
+/* ----------------------------------------------------------------
+   Sections (home)
+   ---------------------------------------------------------------- */
+
+.andera-section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  border-bottom: 1px solid var(--an-hairline);
+}
+.andera-section:last-of-type { border-bottom: none; }
+.andera-section-narrow       { max-width: 820px; }
+
+.andera-section-head {
+  margin-bottom: 32px;
+  max-width: 820px;
+}
+
+.andera-section-title {
+  font-family: var(--an-font-serif);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--an-ink);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.andera-section-body { max-width: 720px; }
+
+.andera-lede {
+  font-family: var(--an-font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--an-ink);
+  margin: 0 0 20px 0;
+}
+
+.andera-section-body p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--an-text-soft);
+  margin-bottom: 14px;
+}
+
+.andera-muted {
+  color: var(--an-muted) !important;
+  font-size: 0.95rem !important;
+  font-style: italic;
+}
+
+/* ----------------------------------------------------------------
+   Workflow steps (display numerals)
+   ---------------------------------------------------------------- */
+
+.andera-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 48px;
+}
+.andera-step {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+.andera-step-num {
+  font-family: var(--an-font-serif);
+  font-weight: 400;
+  font-size: 3.4rem;
+  line-height: 1;
+  color: var(--an-terracotta);
+  letter-spacing: -0.04em;
+  display: inline-block;
+  border-bottom: 1px solid var(--an-terracotta);
+  padding-bottom: 6px;
+  margin-top: -4px;
+}
+.andera-step-body h3 {
+  font-family: var(--an-font-serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--an-ink);
+  margin: 0 0 8px 0;
+}
+.andera-step-body p {
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--an-text-soft);
+  margin: 0;
+}
+@media (max-width: 860px) {
+  .andera-steps { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* ----------------------------------------------------------------
+   Feature grid
+   ---------------------------------------------------------------- */
+
+.andera-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 8px 40px;
+}
+.andera-feature {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  padding: 18px 0;
+  border-top: 1px solid var(--an-hairline);
+  align-items: start;
+}
+.andera-feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--an-surface);
+  border: 1px solid var(--an-hairline);
+  color: var(--an-ink-soft);
+  font-size: 18px;
+}
+.andera-feature-body h3 {
+  font-family: var(--an-font-serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--an-ink);
+  margin: 2px 0 4px 0;
+}
+.andera-feature-body p {
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--an-text-soft);
+  margin: 0;
+}
+
+/* ----------------------------------------------------------------
+   Use cases
+   ---------------------------------------------------------------- */
+
+.andera-usecases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px 40px;
+}
+.andera-usecase {
+  border-top: 1px solid var(--an-hairline);
+  padding-top: 18px;
+}
+.andera-usecase h4 {
+  font-family: var(--an-font-serif);
+  font-weight: 600;
+  font-size: 1.08rem;
+  color: var(--an-ink);
+  margin: 0 0 8px 0;
+}
+.andera-usecase p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--an-text-soft);
+  margin: 0;
+}
+
+/* ----------------------------------------------------------------
+   Dependencies list
+   ---------------------------------------------------------------- */
+
+.andera-deps { margin-top: 6px; }
+.andera-deps dt {
+  font-weight: 600;
+  color: var(--an-ink);
+  margin-top: 8px;
+}
+.andera-deps dd {
+  margin: 2px 0 0 0;
+  color: var(--an-text-soft);
+  font-size: 0.93rem;
+}
+
+/* ----------------------------------------------------------------
+   Contact
+   ---------------------------------------------------------------- */
+
+.andera-contact-card {
+  max-width: 820px;
+}
+.andera-contact-header {
+  margin-bottom: 16px;
+}
+.andera-contact-name {
+  font-family: var(--an-font-serif);
+  font-weight: 600;
+  font-size: 1.7rem;
+  color: var(--an-ink);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.01em;
+}
+.andera-contact-role {
+  color: var(--an-muted);
+  font-style: italic;
+  font-size: 1rem;
+  margin: 0;
+}
+.andera-contact-bio {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--an-text-soft);
+  margin: 0 0 24px 0;
+  max-width: 720px;
+}
+.andera-contact-dl {
+  display: grid;
+  grid-template-columns: minmax(150px, 200px) 1fr;
+  gap: 0;
+  border-top: 1px solid var(--an-hairline);
+  max-width: 720px;
+}
+.andera-contact-dl dt {
+  padding: 14px 0;
+  font-family: var(--an-font-serif);
+  font-weight: 600;
+  color: var(--an-ink);
+  border-bottom: 1px solid var(--an-hairline);
+  letter-spacing: -0.01em;
+}
+.andera-contact-dl dd {
+  padding: 14px 0 14px 8px;
+  margin: 0;
+  border-bottom: 1px solid var(--an-hairline);
+  color: var(--an-text);
+}
+@media (max-width: 640px) {
+  .andera-contact-dl {
+    grid-template-columns: 1fr;
+  }
+  .andera-contact-dl dt { padding-bottom: 0; border-bottom: none; }
+  .andera-contact-dl dd { padding: 4px 0 14px 0; }
+}
+
+/* ----------------------------------------------------------------
+   Cards (analysis tabs)
+   ---------------------------------------------------------------- */
+
+.card {
+  background: var(--an-surface) !important;
+  border: 1px solid var(--an-hairline) !important;
+  border-radius: 4px !important;
+  box-shadow: var(--an-shadow-xs);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.card-header {
+  background: var(--an-surface) !important;
+  border-bottom: 1px solid var(--an-hairline) !important;
+  padding: 12px 18px !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: var(--an-font-sans) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--an-text-soft) !important;
+}
+
+.card-header svg,
+.card-header .bi {
+  color: var(--an-terracotta);
+  flex-shrink: 0;
+}
+
+.card-body { padding: 18px !important; }
+
+/* ----------------------------------------------------------------
+   Buttons
+   ---------------------------------------------------------------- */
+
+.btn {
+  font-family: var(--an-font-sans);
+  font-weight: 500;
+  border-radius: 3px;
+  padding: 7px 16px;
+  letter-spacing: 0.01em;
+  transition: background 0.12s, transform 0.12s, box-shadow 0.12s;
+}
+
+.btn-primary {
+  background-color: var(--an-ink-soft) !important;
+  border-color: var(--an-ink-soft) !important;
+  color: #FFFFFF !important;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--an-ink) !important;
+  border-color: var(--an-ink) !important;
+}
+
+.btn-default, .btn-light, .btn-outline-secondary {
+  background: var(--an-surface) !important;
+  border-color: var(--an-hairline-strong) !important;
+  color: var(--an-ink) !important;
+}
+.btn-outline-secondary:hover {
+  background: var(--an-surface-alt) !important;
+  border-color: var(--an-ink-soft) !important;
+  color: var(--an-ink) !important;
+}
+
+.btn-lg {
+  padding: 11px 22px;
+  font-size: 0.95rem;
+}
+
+/* Download button nudge */
+a.btn[id*="download"],
+a.btn[id*="dl_"] {
+  background: var(--an-surface) !important;
+  border: 1px solid var(--an-hairline-strong) !important;
+  color: var(--an-ink-soft) !important;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+}
+a.btn[id*="download"]:hover,
+a.btn[id*="dl_"]:hover {
+  background: var(--an-surface-alt) !important;
+}
+
+/* ----------------------------------------------------------------
+   Forms
+   ---------------------------------------------------------------- */
+
+.form-control,
+.form-select,
+input[type="text"],
+input[type="number"],
+select {
+  background: var(--an-surface);
+  border: 1px solid var(--an-hairline-strong);
+  border-radius: 3px;
+  color: var(--an-text);
+  font-size: 0.92rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--an-ink-soft);
+  box-shadow: 0 0 0 3px rgba(74, 109, 94, 0.12);
+}
+
+.form-label,
+label {
+  color: var(--an-text);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.help-block, .form-text {
+  color: var(--an-muted);
+  font-size: 0.85rem;
+}
+
+.irs-bar,
+.irs-bar-edge,
+.irs-from,
+.irs-to,
+.irs-single {
+  background: var(--an-ink-soft) !important;
+  border-top-color: var(--an-ink-soft) !important;
+  border-bottom-color: var(--an-ink-soft) !important;
+}
+.irs-bar::before,
+.irs-from::before,
+.irs-to::before,
+.irs-single::before {
+  border-top-color: var(--an-ink-soft) !important;
+}
+
+/* ----------------------------------------------------------------
+   Tabs (navset_card_tab)
+   ---------------------------------------------------------------- */
+
+.nav-tabs {
+  border-bottom: 1px solid var(--an-hairline);
+  padding: 0 18px;
+}
+.nav-tabs .nav-link {
+  font-family: var(--an-font-sans);
+  font-weight: 500;
+  font-size: 0.88rem;
+  color: var(--an-text-soft);
+  border: none;
+  padding: 10px 14px;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+}
+.nav-tabs .nav-link:hover {
+  color: var(--an-ink);
+  border-bottom-color: var(--an-hairline-strong);
+}
+.nav-tabs .nav-link.active {
+  color: var(--an-ink) !important;
+  background: transparent !important;
+  border-bottom: 2px solid var(--an-terracotta) !important;
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------------
+   Accordion
+   ---------------------------------------------------------------- */
+
+.accordion {
+  --bs-accordion-border-color: var(--an-hairline);
+  --bs-accordion-bg: var(--an-surface);
+  --bs-accordion-border-radius: 4px;
+  --bs-accordion-btn-focus-border-color: var(--an-ink-soft);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 3px rgba(74, 109, 94, 0.12);
+}
+.accordion-button {
+  background: var(--an-surface);
+  color: var(--an-ink);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.accordion-button:not(.collapsed) {
+  background: var(--an-surface-alt);
+  color: var(--an-ink);
+  box-shadow: none;
+}
+.accordion-body {
+  color: var(--an-text-soft);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* ----------------------------------------------------------------
+   Tables
+   ---------------------------------------------------------------- */
+
+table.shiny-table,
+.shiny-table {
+  font-family: var(--an-font-sans);
+  font-size: 0.9rem;
+}
+.shiny-table thead th {
+  background: var(--an-surface-alt);
+  color: var(--an-ink);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--an-hairline-strong);
+}
+.shiny-table tbody td {
+  border-bottom: 1px solid var(--an-hairline);
+}
+
+pre {
+  background: var(--an-surface-alt);
+  border: 1px solid var(--an-hairline);
+  border-radius: 4px;
+  padding: 10px 14px;
+}
+
+/* ----------------------------------------------------------------
+   Footer
+   ---------------------------------------------------------------- */
+
+.andera-footer {
+  margin-top: 40px;
+  padding: 36px 24px;
+  background: var(--an-ink);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+}
+.andera-footer-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+}
+.andera-footer .andera-eyebrow {
+  color: var(--an-gold);
+  margin-bottom: 8px;
+}
+.andera-footer a {
+  color: #FFFFFF !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
+  font-weight: 500;
+}
+.andera-footer a:hover {
+  color: var(--an-terracotta) !important;
+  border-bottom-color: var(--an-terracotta) !important;
+}
+.andera-footer-lead {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 380px;
+}
+.andera-footer .andera-muted {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 0.82rem !important;
+  font-style: normal;
+}
+@media (max-width: 768px) {
+  .andera-footer-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ----------------------------------------------------------------
+   Misc
+   ---------------------------------------------------------------- */
+
+hr {
+  border-color: var(--an-hairline);
+  opacity: 1;
+  margin: 20px 0;
+}
+
+.text-danger { color: var(--an-oxblood) !important; }
+
+::selection {
+  background: rgba(196, 169, 98, 0.32);
+  color: var(--an-ink);
+}
