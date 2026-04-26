@@ -1,13 +1,9 @@
-# ----- Project Description ----
+# ----- Andera-Shiny ----
 #
-# Shiny application for the study of microbiomes
-# Date: 14/07/2023
-# Author: Alejandro Navas González
-#
+# Shiny dashboard para el análisis exploratorio de microbiomas.
+# Los módulos Shiny viven en R/ y son autocargados por Shiny.
 
-# ----- General Zone ----
-
-# Loading of the packages for shiny development
+# ----- Paquetes de interfaz -----
 library(shiny)
 library(shinycssloaders)
 library(shinydashboard)
@@ -16,39 +12,36 @@ library(shinyWidgets)
 library(shinymeta)
 library(htmlwidgets)
 
-# Loading of the package used to edit the interface theme
+# ----- Tema del dashboard -----
 library(fresh)
 
-# Load the packages to be used for the tables in the application. 
+# ----- Tablas y manipulación de datos -----
 library(tidyverse)
 library(data.table)
 library(DT)
 
-# Loading of the packages for the statistical study
+# ----- Estadística -----
 library(skimr)
 library(ggcorrplot)
 library(ggstatsplot)
 library(PMCMRplus)
 library(psych)
 
-# Loading of bioconductor packages
+# ----- Bioconductor -----
 library(phyloseq)
 library(vegan)
 library(microbiome)
 library(ComplexHeatmap)
 library(microViz)
 
-# Loading of packages to edit the graphics palettes
+# ----- Paletas -----
 library(palettetown)
 library(ggsci)
 library(viridis)
 library(RColorBrewer)
 
-
-# Establish a common theme for the graphics.
+# ----- Tema ggplot común -----
 theme_set(
-  theme_light() + 
-    theme(
-      text = element_text(size = 16, family = "serif")
-      )
-  )
+  theme_light() +
+    theme(text = element_text(size = 16, family = "serif"))
+)

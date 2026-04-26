@@ -1,0 +1,69 @@
+/* ========================================================================
+   Andera — estilo propio
+   Paleta base definida en R/app_theme.R (fresh):
+     burgundy    #5D263E
+     nord-gray   #D8DEE9
+     nord-blue   #81A1C1
+   ======================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+body,
+.content-wrapper,
+.box-body,
+.skin-blue .main-sidebar,
+.skin-blue .main-sidebar .sidebar .sidebar-menu > li > a {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+.box-title,
+.main-header .logo,
+.main-header .navbar-custom-menu {
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ----- Cabecera con logo ----- */
+.main-header .logo img.andera-logo {
+  height: 32px;
+  width: auto;
+  vertical-align: middle;
+  margin-right: 8px;
+  /* el árbol celta es gris: dejamos que el color del header lo tiñe mediante opacidad */
+}
+
+/* ----- Boxes con accent burgundy ----- */
+.box {
+  border-top: 3px solid #5D263E;
+  border-radius: 4px;
+}
+.box.box-primary > .box-header {
+  border-bottom: 1px solid rgba(93, 38, 62, 0.15);
+}
+
+/* ----- Banner del dataset ----- */
+.content > .shiny-html-output + .row .alert,
+.content .shiny-html-output .alert {
+  border-radius: 6px;
+  border: none;
+  border-left: 4px solid currentColor;
+}
+
+/* ----- Footer ----- */
+.andera-footer {
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.85rem;
+  padding: 20px 0 12px;
+  margin-top: 30px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+.andera-footer a {
+  color: #5D263E;
+  text-decoration: none;
+}
+.andera-footer a:hover {
+  text-decoration: underline;
+}
